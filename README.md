@@ -1,96 +1,212 @@
-# Obsidian Sample Plugin
+# brainframe
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+The Brain Frame, the app that connects your life together.
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+# What is Brainframe?
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+Right now, it's an idea, built off the back of a group of ideas and
+how they interact with Getting Things Done.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Changes the default font color to red using `styles.css`.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+Getting Things Done has several elements to it that are critical to
+making it work. Those individual elements are worthy of being whole
+products all by themselves (and actually are) already.
 
-## First time developing plugins?
+In essence, every single item can be responded to by placing it in one
+of these specific locations:
 
-Quick starting guide for new plugin devs:
+* Trash
+* Incubate/Someday/Maybe
+* Reference materials
+* Projects
+	* Project actions
+* Next Actions
+	* Do immediately
+	* Do at next opportunity
+* Calendar
+* Delegated / Waiting
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+# Existing Products
 
-## Releasing new releases
+Some current products cover aspects of this extremely well.
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+## [Todoist](https://www.todoist.com/)
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+Todoist covers projects and next actions quite nicely. It allows for
+individual actions, projects (which all have actions items for those
+projects), and even some amount of delegation.
 
-## Adding your plugin to the community plugin list
+Where it falls down is in the long term reference archive and the
+calendar. In addition, it is arguable if it provides a good single
+inbox for everything. Multiple email accounts, calendars, task lists,
+all need to be combined to capture things. With enough web extensions,
+it can work, but I question if ever more extensions is the best
+choice.
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+Next actions are also fairly sketchy. What if my project has five
+actions, and multiple actions can be accomplished in a single day? The
+recommended practice at
+<https://todoist.com/productivity-methods/getting-things-done> would
+require me to re-visit my actions list after every task to tag them
+with `@next`.
 
-## How to use
+It's worth noting that [Trello](https://www.trello.com/) exists, and
+provides an alternative to Todoist, but with many of the same
+pitfalls. The GUI is possibly nicer to deal with though.
 
-- Clone this repo.
-- `npm i` or `yarn` to install dependencies
-- `npm run dev` to start compilation in watch mode.
+## [Orgmode](https://www.orgmode.org/)
 
-## Manually installing the plugin
+I can't say enough good things about Orgmode. Everything is stored in
+plain text. It has agendas, next actions, can be used for
+zettelkasten, can store and access media, has a zotero connector, web
+extensions, in short it covers nearly every possible use case.
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+Where it fails is in the connection to the digital world. It doesn't
+integrate with digital speakers, no mobile clients, the connections
+with the calendar are convoluted to set up, and making changes/using
+the API is difficult unless you are experienced with emacs lisp. It's
+amazingly powerful, but the power comes at the price of a significant
+investment of time and effort to make it truly (and personally)
+awesome.
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+## [Google Calendar](https://calendar.google.com/)
 
-## Funding URL
+Simple and effective calendar, shows the time that is blocked off for
+activities, and provides a clear agenda of planned and open time.
 
-You can include funding URLs where people who use your plugin can financially support it.
+Where this falls down is in having a list of tasks that are not
+scheduled for a specific day/time, but need to get done at the next
+available opportunity. Todoist handles a calendar somewhat, but it
+doesn't easily include things like a Dr appt, resulting in multiple
+places to look to figure out what needs doing and when.
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+It also fails to handle anything to do with reference material. The
+only way to link anything with reference material is to manually add
+the information to the event.
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+## [Zotero](https://www.zotero.com/)
 
-If you have multiple URLs, you can also do:
+This tool provides a great bibliography, and even has some ability to
+include snapshots of pdfs, web pages, etc. It misses out on a key
+aspect, though: Cross-linking the data. It misses out on the entirety
+of the Zettelkasten system, and that system provides immense value.
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+It does not manage calendars, projects, actions, incubating ideas,
+none of that at all. It should not be discounted, though. It provides
+real value, in part because it's so specific about what it does.
 
-## API Documentation
+## [Pocket](https://www.getpocket.com/) and [Goodreads](https://www.goodreads.com/)
 
-See https://github.com/obsidianmd/obsidian-api
+These two tools maintain separate reading lists that are mostly
+incompatible with each other. Pocket is used for anything on the web,
+while Goodreads is used for anything offline. They do not integrate
+directly with Zotero, are not a part of the next actions list, do not
+participate in the calendar, and are essentially completely standalone
+from everything else in this process.
+
+However, they can (and should be) a part of the process, allowing me
+to say "I have time to read, what should I read next?" In other words,
+they should appear in the next actions list, they're just harder to
+showcase in the process as it stands.
+
+## [The Zettelkasten Method](https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125)
+
+A zettelkasten (or slip box or note box) is a different way of
+organizing reference material into individual note cards. It provides
+an easier way to roam through what you've learned over the years, and
+discover new connections among these things. It even allows for you to
+discover how your thoughts on a topic have evolved. For a reference
+archive, it's absolute genius, and I wish I had been taught this
+system (and used it) as a kid. I can't even imagine how much
+information I'd have in my zettelkasten by now if I had.
+
+A blog about how to use and maintain your own zettelkasten is
+available, and has been quite interesting to read so far. See
+<https://zettelkasten.de>
+
+This does not have any means of tracking projects, calendars, action
+items, what's been delegated, any of that. It's *only* for tracking my
+personal reference archive.
+
+## [Journaling](https://journey.cloud/)
+
+Journaling apps do exist, and Journey.cloud is just one of them that
+I've used. I've also used Orgmode for journaling. It's not explicitly
+listed in the GTD process, but regular reviews are listed, and a
+journal provides a way to do just that. They also provide a way for
+people to snapshot their thoughts for a day, and some sort of support
+for it should be put in place here.
+
+They don't really connect with the other buckets, except for reference
+material. A journal can link to it, or explain how that reference
+material came about.
+
+## [Habitica](https://habitica.com/)
+
+Habitica (and others like it) provide habit tracking tools to help the
+user develop better habits that the user defines. For instance,
+getting in a daily workout of some sort would be a good habit to
+track. These are the sorts of things that are usually not good fits
+for agendas. They don't fit well as todo items, since they are
+supposed to recur regularly. They're not reference. They're not
+projects. They really are their own thing.
+
+However, Brainframe is about helping to manage your life. Habits are
+one of the things that people want to do better. Some sort of habit
+tracker needs to be included.
+
+# Processes To Incorporate
+
+## Personal Review
+
+* What are your values?
+* How does your lifestyle reflect those values?
+* What do you do that does not align with those values?
+* What are your goals?
+* What do your horizons looks like (see Getting Things Done book for
+  definitions)
+
+## Letter to future self
+
+Not sure if this is a good one or just hokey, but I'm going to note it
+in here for now. It might be able to help out as people work to define
+what they want and help them move forward.
+
+# Conclusions and Looking Forward
+
+All of these tools provide essential elements of the whole process,
+while not being fully integrated with each other or with our whole
+digital world. Brainframe will seek to provide integration across
+everything, to allow its users to cover all of the components from
+above, and do so across their entire digital landscape:
+
+* Desktop client (Windows, Linux, Mac support out of the box)
+* Mobile client (iOS, Android)
+* Web app (can be used at the central location as a traditional cloud
+  based app, or a personal installation on a user's own site)
+* Smart speakers (Alexa and Google Home)
+
+It will store the user data in Markdown formatted text. Where the data
+is binary (pictures, videos), it will attempt to store in a common
+format (PNG for still images, MP4 for video). Other media to be stored
+on a case-by-case basis, with the real possibility that some binary
+data may be stored without Brainframe having the ability to do
+anything with the data. For instance, data might be encrypted for some
+reason, or it's a format known only to a single app (or two).
+
+# Other Requirements I've Written Down
+
+* A knowledge management system
+* A to-do list
+* A journal
+* A bibliography (think something like Zotero, if you're familiar with that)
+* A web page capture/clipper
+* A "media to consume" list (books, youtube videos, something like Pocket on steroids)
+* A way to share sub-sections of this with others (for instance, the journal likely should never be shared)
+* Synchronized across multiple machines
+* Stores everything in text (when possible)
+* Allows attaching media to it (pics, videos, PDFs, etc)
+* Cross platform (Win/Lin/Mac/iOS/Android)
+
+# TODO
+* Archive notes
+* Bookmarking links
