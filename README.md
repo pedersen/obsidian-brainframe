@@ -2,6 +2,43 @@
 
 The Brain Frame, the app that connects your life together.
 
+# Quick Usage
+
+This plugin is *extremely* incomplete, and is being released at this
+stage simply to make usage easier for me. More features will be
+forthcoming, but I wanted to get this out the door.
+
+Right now, two new commands are added, along with relevant settings
+for those commands.
+
+## Add Product Bookmark
+
+Open your browser, go to the product you wish to bookmark, click the
+address bar, highlight everything, and press "Control-C" (or "Command-C")
+to copy the contents. Open your vault in Obsidian, and press 
+"Control-Shift-P" or "Command-Shift-P". You will now have a file named 
+"products.md" at the root of your vault, with the product page title
+and address as the last entry in that page in your vault. You can edit
+this file as much as you wish, all that will ever be done by this plugin
+is to add the product in question as a link for you here.
+
+To edit which file the entry will be added to, open the settings in your
+vault, go to the Brainframe tab, and change the products setting.
+
+## Add Git Bookmark
+
+Open your browser, go to the repository you wish to bookmark, click the
+address bar, highlight everything, and press "Control-C" (or "Command-C")
+to copy the contents. Open your vault in Obsidian, and press
+"Control-Shift-P" or "Command-Shift-P". You will now have a file named
+"gitmarkss.md" at the root of your vault, with the repository page title
+and address as the last entry in that page in your vault. You can edit
+this file as much as you wish, all that will ever be done by this plugin
+is to add the product in question as a link for you here.
+
+To edit which file the entry will be added to, open the settings in your
+vault, go to the Brainframe tab, and change the gitmarks setting.
+
 # What is Brainframe?
 
 Right now, it's an idea, built off the back of a group of ideas and
