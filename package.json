@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-brainframe",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "This is a set of tools to make Obsidian have enhanced functionality as defined in the README.",
 	"main": "main.js",
 	"scripts": {
