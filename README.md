@@ -2,6 +2,16 @@
 
 The Brain Frame, the app that connects your life together.
 
+# Community Plugin Dependencies
+
+- Full Calendar
+- Heatmap Calendar
+- Dataview
+- Citations
+- Pocket
+- Templater
+- Todoist Plugin
+
 # Quick Usage
 
 This plugin is *extremely* incomplete, and is being released at this
@@ -38,6 +48,13 @@ is to add the product in question as a link for you here.
 
 To edit which file the entry will be added to, open the settings in your
 vault, go to the Brainframe tab, and change the gitmarks setting.
+
+## Archive A Note
+
+Move the note from where it currently sits into the archive folder (by
+default, `_archived`). The location is configurable. Note that this command
+is also available by right-clicking on a note or by right-clicking on an
+editor tab.
 
 # What is Brainframe?
 

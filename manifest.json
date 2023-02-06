@@ -6,6 +6,5 @@
 	"description": "This is a set of tools to help Obsidian manage extras (such as storing links like products and software) that it doesn't currently do.",
 	"author": "Michael J. Pedersen <m.pedersen@icelus.org>",
 	"authorUrl": "https://brainframe.tech/",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": true
+	"isDesktopOnly": false
 }

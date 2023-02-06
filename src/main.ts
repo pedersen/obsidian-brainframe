@@ -8,7 +8,6 @@ import {
 	TFolder,
 	request, TAbstractFile, Editor
 } from 'obsidian';
-import {clipboard} from 'electron';
 
 interface BrainframeSettings {
 	gitmarks: string;
@@ -33,13 +32,12 @@ function validateUrl(url: string): URL {
 export default class Brainframe extends Plugin {
 	settings: BrainframeSettings;
 
-	async addMarksFile(fname: string, id: string, hotkey: string, cmdname: string) {
+	async addMarksFile(fname: string, id: string, cmdname: string) {
 		this.addCommand({
 				id: id,
 				name: cmdname,
-				hotkeys: [{modifiers: ["Mod", "Shift"], key: hotkey}],
-				callback: () => {
-					const url = clipboard.readText();
+				callback: async () => {
+					const url = await navigator.clipboard.readText();
 					validateUrl(url);
 
 					new Notice(`Attempting to load ${url}`);
@@ -55,7 +53,6 @@ export default class Brainframe extends Plugin {
 							})
 							.catch(err => {
 								new Notice(`Unable to load ${url}: ${err}`);
-								console.log(err);
 							});
 					} else if (folderOrFile instanceof TFolder) {
 						new Notice(`Unable to add mark, ${fname} is a folder`);
@@ -99,13 +96,11 @@ export default class Brainframe extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		await this.addMarksFile(this.settings.gitmarks, 'brainframe-add-gitmark', 'g',
-			'Add Git bookmark');
-		await this.addMarksFile(this.settings.products, 'brainframe-add-productmark', 'p',
-			'Add Product bookmark');
+		await this.addMarksFile(this.settings.gitmarks, 'add-gitmark', 'Add Git bookmark');
+		await this.addMarksFile(this.settings.products, 'add-productmark', 'Add Product bookmark');
 
 		this.addCommand({
-				id: 'brainframe-archive-note',
+				id: 'archive-note',
 				name: 'Archive Current Note',
 				editorCallback: (editor: Editor) => {
 					this.archiveNote(this.app.workspace.getActiveFile());
@@ -179,7 +174,6 @@ class BrainframeSettingTab extends PluginSettingTab {
 				.setPlaceholder('Enter your gitmarks note name')
 				.setValue(this.plugin.settings.gitmarks)
 				.onChange(async (value) => {
-					console.log('gitmarks note name: ' + value);
 					this.plugin.settings.gitmarks = value;
 					await this.plugin.saveSettings();
 				}));
@@ -191,7 +185,6 @@ class BrainframeSettingTab extends PluginSettingTab {
 				.setPlaceholder('Enter your products note name')
 				.setValue(this.plugin.settings.products)
 				.onChange(async (value) => {
-					console.log('products note name: ' + value);
 					this.plugin.settings.products = value;
 					await this.plugin.saveSettings();
 				}));
@@ -203,7 +196,6 @@ class BrainframeSettingTab extends PluginSettingTab {
 				.setPlaceholder('Enter the name of the archived notes folder')
 				.setValue(this.plugin.settings.archived)
 				.onChange(async (value:string) => {
-					console.log('archived notes name: ' + value);
 					this.plugin.settings.archived = value;
 					await this.plugin.saveSettings();
 				}))
