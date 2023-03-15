@@ -12,12 +12,14 @@ import {
 interface BrainframeSettings {
 	gitmarks: string;
 	products: string;
+	giftideas: string;
 	archived: string;
 }
 
 const DEFAULT_SETTINGS: BrainframeSettings = {
 	gitmarks: 'gitmarks.md',
 	products: 'products.md',
+	giftideas: 'giftideas.md',
 	archived: '_archived'
 }
 
@@ -79,7 +81,7 @@ export default class Brainframe extends Plugin {
 	async archiveNote(toArchive: TAbstractFile|null) {
 		await this.ensureArchiveExists();
 		if (toArchive instanceof TFile) {
-			await this.app.vault.rename(toArchive, `${this.settings.archived}/${toArchive?.name}`)
+			await this.app.fileManager.renameFile(toArchive, `${this.settings.archived}/${toArchive?.name}`)
 			await this.app.fileManager.processFrontMatter(toArchive, (frontMatter) => {
 				if (frontMatter.tags == null) {
 					frontMatter.tags = new Array<string>;
@@ -98,6 +100,7 @@ export default class Brainframe extends Plugin {
 
 		await this.addMarksFile(this.settings.gitmarks, 'add-gitmark', 'Add Git bookmark');
 		await this.addMarksFile(this.settings.products, 'add-productmark', 'Add Product bookmark');
+		await this.addMarksFile(this.settings.giftideas, 'add-giftidea', 'Add Gift Idea bookmark');
 
 		this.addCommand({
 				id: 'archive-note',
